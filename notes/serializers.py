@@ -1,9 +1,8 @@
-from rest_framework.generics import ListCreateAPIView
-
+from rest_framework import serializers
 from .models import Note
-from .serializers import NoteSerializer
 
 
-class NoteListView(ListCreateAPIView):
-    queryset = Note.objects.all()
-    serializer_class = NoteSerializer
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = "__all__"

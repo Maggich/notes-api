@@ -1,30 +1,31 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import Note, Task, Product
+from rest_framework.generics import ListCreateAPIView
+from .serializers import NoteSerializer
+
+# def note_list(request):
+#     if request.method != "GET":
+#         return JsonResponse({"detail": "Method not allowed"}, status=405)
+
+#     notes = list(Note.objects.values("id", "title", "text"))
+#     return JsonResponse({"items": notes})
 
 
-def note_list(request):
-    if request.method != "GET":
-        return JsonResponse({"detail": "Method not allowed"}, status=405)
-
-    notes = list(Note.objects.values("id", "title", "text"))
-    return JsonResponse({"items": notes})
-
-
-def note_detail(request, note_id):
-    if request.method != "GET":
-        return JsonResponse({"detail": "Method not allowed"}, status=405)
+# def note_detail(request, note_id):
+#     if request.method != "GET":
+#         return JsonResponse({"detail": "Method not allowed"}, status=405)
     
-    note = get_object_or_404(Note, id=note_id)
+#     note = get_object_or_404(Note, id=note_id)
     
     
-    data = {
-        "id": note.id,
-        "title": note.title,
-        "text": note.text
-    }
+#     data = {
+#         "id": note.id,
+#         "title": note.title,
+#         "text": note.text
+#     }
 
-    return JsonResponse(data)
+#     return JsonResponse(data)
 
 
 def task(request):
@@ -45,3 +46,7 @@ def product(request):
 
     return JsonResponse({"items": product})
 
+
+class NoteListView(ListCreateAPIView):    
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
