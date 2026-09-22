@@ -22,8 +22,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          docker exec notes-api-backend-1 python -m pip install --upgrade pip
-          docker exec notes-api-backend-1 pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Check migrations
         run: docker exec notes-api-backend-1 python manage.py makemigrations --check --dry-run
