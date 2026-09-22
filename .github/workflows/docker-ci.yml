@@ -26,7 +26,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Check migrations
-        run: docker exec notes-api-backend-1 python manage.py makemigrations --check --dry-run
+        run:  python manage.py makemigrations --check --dry-run
 
       - name: Run tests
         run: docker exec notes-api-backend-1 python -m pytest -q
