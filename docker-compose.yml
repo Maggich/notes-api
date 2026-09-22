@@ -22,9 +22,9 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_HOST: db
+      POSTGRES_HOST: db-1
     depends_on:
-      db:
+      db-1:
         condition: service_healthy
     ports:
       - "8000:8000"
