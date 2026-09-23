@@ -89,3 +89,13 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.IMAGE_NAME }}:latest
+  
+  deploy-preview:
+    name: Explain deploy step
+    needs: publish
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show image that would be deployed
+        run: |
+          echo "Deploy image: ghcr.io/${{ github.repository_owner }}/notes-api:${{ github.sha }}"
